@@ -72,6 +72,7 @@ public class DishController {
 		dishes = dishServices.getAll();
 		return dishes;
 	}
+	
 	@GetMapping("/hightolow")
 	public List<Dish> getAllDishesSortHighToLow(){
 		List<Dish> dishes = new ArrayList<>();
