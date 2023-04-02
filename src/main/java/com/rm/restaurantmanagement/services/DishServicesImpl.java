@@ -1,5 +1,11 @@
 package com.rm.restaurantmanagement.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +39,90 @@ public class DishServicesImpl implements DishServices{
 				.rating(dishEntity.getRating())
 				.time(dishEntity.getTime())
 				.build();
-		
 		return dish;
+	}
+
+	@Override
+	public List<Dish> getAll() {
+		List<DishEntity> dishEntities =  dishEntityRepository.findAll();
+		List<Dish> dishes = new ArrayList<>();
+		dishes = dishEntities.stream().map((dishEntity) -> Dish.builder()
+				.id(dishEntity.getId())
+				.name(dishEntity.getName())
+				.description(dishEntity.getDescription())
+				.price(dishEntity.getPrice())
+				.cuisine(dishEntity.getCuisine())
+				.photo(dishEntity.getPhoto())
+				.rating(dishEntity.getRating())
+				.time(dishEntity.getTime())
+				.build()).collect(Collectors.toList());
+		return dishes;
+	}
+
+	@Override
+	public List<Dish> getAllHighToLow() {
+		List<DishEntity> dishEntities =  dishEntityRepository.findAll();
+		List<Dish> dishes = new ArrayList<>();
+		dishes = dishEntities.stream().map((dishEntity) -> Dish.builder()
+				.id(dishEntity.getId())
+				.name(dishEntity.getName())
+				.description(dishEntity.getDescription())
+				.price(dishEntity.getPrice())
+				.cuisine(dishEntity.getCuisine())
+				.photo(dishEntity.getPhoto())
+				.rating(dishEntity.getRating())
+				.time(dishEntity.getTime())
+				.build()).collect(Collectors.toList());
+//		for(int i = 0; i < dishes.size() - 1; i++) {
+//			int pricei = Integer.valueOf(dishes.get(i).getPrice());
+//			for(int j = 0; j < dishes.size()- i- 1; j++) {
+//				int pricei1 = Integer.valueOf(dishes.get(j).getPrice());
+//				if (pricei > pricei1) {
+//					Dish temp = new Dish();
+//					temp = dishes.get(i);
+//					dishes.set(i, dishes.get(j));
+//					dishes.set(j, temp);
+//				}
+//			}
+//			
+//		}
+		 Collections.sort(dishes, new Comparator<Dish>() {
+
+				@Override
+				public int compare(Dish o1, Dish o2) {
+					int p1 = Integer.valueOf(o1.getPrice());
+					int p2 = Integer.valueOf(o2.getPrice());
+					return p2 - p1;
+				}
+	        });
+		return dishes;
+	}
+
+	@Override
+	public List<Dish> getAllLowToHigh() {
+		List<DishEntity> dishEntities =  dishEntityRepository.findAll();
+		List<Dish> dishes = new ArrayList<>();
+		dishes = dishEntities.stream().map((dishEntity) -> Dish.builder()
+				.id(dishEntity.getId())
+				.name(dishEntity.getName())
+				.description(dishEntity.getDescription())
+				.price(dishEntity.getPrice())
+				.cuisine(dishEntity.getCuisine())
+				.photo(dishEntity.getPhoto())
+				.rating(dishEntity.getRating())
+				.time(dishEntity.getTime())
+				.build()).collect(Collectors.toList());
+		
+		 Collections.sort(dishes, new Comparator<Dish>() {
+
+				@Override
+				public int compare(Dish o1, Dish o2) {
+					int p1 = Integer.valueOf(o1.getPrice());
+					int p2 = Integer.valueOf(o2.getPrice());
+					return p1 - p2;
+				}
+	        });
+		return dishes;
 	}
 
 }
