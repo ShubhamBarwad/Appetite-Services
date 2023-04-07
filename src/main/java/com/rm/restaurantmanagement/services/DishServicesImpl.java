@@ -55,6 +55,7 @@ public class DishServicesImpl implements DishServices{
 				.photo(dishEntity.getPhoto())
 				.rating(dishEntity.getRating())
 				.time(dishEntity.getTime())
+				.tag(dishEntity.getTag())
 				.build()).collect(Collectors.toList());
 		return dishes;
 	}
@@ -72,6 +73,7 @@ public class DishServicesImpl implements DishServices{
 				.photo(dishEntity.getPhoto())
 				.rating(dishEntity.getRating())
 				.time(dishEntity.getTime())
+				.tag(dishEntity.getTag())
 				.build()).collect(Collectors.toList());
 //		for(int i = 0; i < dishes.size() - 1; i++) {
 //			int pricei = Integer.valueOf(dishes.get(i).getPrice());
@@ -111,6 +113,7 @@ public class DishServicesImpl implements DishServices{
 				.photo(dishEntity.getPhoto())
 				.rating(dishEntity.getRating())
 				.time(dishEntity.getTime())
+				.tag(dishEntity.getTag())
 				.build()).collect(Collectors.toList());
 		
 		 Collections.sort(dishes, new Comparator<Dish>() {

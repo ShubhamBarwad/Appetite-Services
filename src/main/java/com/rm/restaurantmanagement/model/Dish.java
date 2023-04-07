@@ -19,5 +19,5 @@ public class Dish {
 	private String photo;
 	private String rating;
 	private String time;
-
+	private String tag;
 }

@@ -38,6 +38,7 @@ public class DishController {
 		String description = param.get("description");
 		String price = param.get("price");
 		String cuisine = param.get("cuisine");
+		String tag = param.get("tag");
 		String photo = param.get("photo");
 		double choice = Math.random()*4;
 		int rating = 0;
@@ -59,6 +60,7 @@ public class DishController {
 				.cuisine(cuisine)
 				.rating(String.valueOf(rating))
 				.time(time)
+				.tag(tag)
 				.build();
 		dish = dishServices.createDish(dish);
 		System.out.println(dish);

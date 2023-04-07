@@ -32,5 +32,6 @@ public class DishEntity {
 	private String photo;
 	private String rating;
 	private String time;
+	private String tag;
 
 }
