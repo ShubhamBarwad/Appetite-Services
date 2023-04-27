@@ -1,10 +1,12 @@
 package com.rm.restaurantmanagement.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -33,5 +35,7 @@ public class DishEntity {
 	private String rating;
 	private String time;
 	private String tag;
-
+	
+//	@ManyToOne(cascade=CascadeType.ALL, targetEntity = CartEntity.class)
+//	private CartEntity cartEntity;
 }

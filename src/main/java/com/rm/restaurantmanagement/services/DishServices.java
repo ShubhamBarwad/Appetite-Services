@@ -13,4 +13,8 @@ public interface DishServices {
 	public List<Dish> getAllHighToLow();
 	
 	public List<Dish> getAllLowToHigh();
+
+	public Dish delete(int idInt);
+
+	public Dish modifyDish(Dish dish);
 }

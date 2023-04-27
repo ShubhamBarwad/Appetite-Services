@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -126,6 +127,32 @@ public class DishServicesImpl implements DishServices{
 				}
 	        });
 		return dishes;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public Dish delete(int id) {
+		DishEntity dishEntity = new DishEntity();
+		dishEntity = dishEntityRepository.getById(id);
+//		dishEntityRepository.deleteById(id);
+		Dish dish = new Dish();
+		BeanUtils.copyProperties(dishEntity, dish);
+		return dish;
+	}
+
+	@Override
+	public Dish modifyDish(Dish dish) {
+		DishEntity dishEntity = new DishEntity();
+		Dish oldDish = new Dish();
+		dishEntity = dishEntityRepository.getById(dish.getId());
+		dishEntity.setName(dish.getName());
+		dishEntity.setCuisine(dish.getCuisine());
+		dishEntity.setPrice(dish.getPrice());
+		dishEntity.setTag(dish.getTag());
+		dishEntity.setTime(dish.getTime());
+		dishEntity = dishEntityRepository.save(dishEntity);
+		BeanUtils.copyProperties(dishEntity, oldDish);
+		return oldDish;
 	}
 
 }

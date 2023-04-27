@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,4 +88,40 @@ public class DishController {
 		dishes = dishServices.getAllLowToHigh();
 		return dishes;
 	}
+	@DeleteMapping("/delete")
+	public Dish deleteDish(@RequestParam Map<String,String> param) {
+		String id = param.get("id");
+		int idInt = Integer.parseInt(id);
+		System.out.println("Delete Endpoint Hit");
+		Dish dish = new Dish();
+		dish = dishServices.delete(idInt);
+		return dish;
+	}
+	@PostMapping("/modify")
+	public Dish modifyDish(@RequestParam Map<String, String> param) {
+		System.out.println("Modify Endpoint Hit");
+		Dish dish = new Dish();
+		String id = param.get("id");
+		int idInt = Integer.parseInt(id);
+		String name = param.get("name");
+		String cuisine = param.get("cuisine");
+		String price = param.get("price");
+		String tag = param.get("tag");
+		String time = param.get("time");
+		dish = Dish.builder()
+				.id(idInt)
+				.name(name)
+				.cuisine(cuisine)
+				.price(price)
+				.tag(tag)
+				.time(time)
+				.build();
+		
+		dish = dishServices.modifyDish(dish);
+		System.out.println("Tag: "+ tag);
+		System.out.println(id);
+		
+		return dish;
+	}
+	
 }
