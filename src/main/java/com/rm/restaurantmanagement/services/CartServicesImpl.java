@@ -24,8 +24,8 @@ public class CartServicesImpl implements CartServices{
 		CartEntity cartEntity = new CartEntity();
 		List<CartEntity> cartEntityPresent = cartEntityRepository.findAll();
 		for(CartEntity ce: cartEntityPresent) {
-			if(ce.getDishId() == cart.getDishId()) {
-//				System.out.println(ce.getName());
+			if(ce.getDishId() == cart.getDishId() && ce.getCartId().equals(cart.getCartId())) {
+				System.out.println(ce.getName());
 				cartEntity = ce;
 				cartEntity.setInCart(ce.getInCart()+1);
 				cartEntity = cartEntityRepository.save(cartEntity);
